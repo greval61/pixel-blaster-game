@@ -114,6 +114,21 @@ html, body {
   background: rgba(13, 13, 13, 0.85);
   z-index: 20;
   gap: 16px;
+  padding: 20px;
+}
+
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px 20px;
+  border: 2px solid rgba(0, 229, 255, 0.35);
+  background: rgba(13, 13, 13, 0.7);
+  border-radius: 18px;
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.18);
+  max-width: min(92vw, 480px);
 }
 
 .title {
@@ -125,6 +140,7 @@ html, body {
     4px 4px 0 var(--electric-magenta);
   letter-spacing: 6px;
   animation: titlePulse 2s ease-in-out infinite;
+  text-align: center;
 }
 
 @keyframes titlePulse {
@@ -143,7 +159,8 @@ html, body {
   font-size: clamp(12px, 3vw, 16px);
   color: var(--electric-magenta);
   letter-spacing: 3px;
-  margin-bottom: 8px;
+  margin: 0;
+  opacity: 0.9;
 }
 
 .final-score {
@@ -153,13 +170,13 @@ html, body {
 }
 
 .controls-info {
-  margin-top: 24px;
+  margin-top: 4px;
   text-align: center;
 }
 
 .controls-info p {
   font-size: clamp(10px, 2.5vw, 13px);
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
   margin: 4px 0;
 }
 
@@ -173,7 +190,8 @@ html, body {
   letter-spacing: 2px;
   transition: all 0.15s ease;
   min-width: 200px;
-  min-height: 48px;
+  min-height: 52px;
+  border-radius: 12px;
 }
 
 .btn-primary {
@@ -205,30 +223,32 @@ html, body {
 .btn-mobile {
   position: absolute;
   z-index: 15;
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   border: 2px solid var(--neon-cyan);
   background: rgba(26, 26, 64, 0.8);
   color: var(--neon-cyan);
-  font-size: 22px;
+  font-size: 26px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   touch-action: manipulation;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
 }
 
 #btn-pause-mobile {
-  top: 12px;
+  top: max(12px, env(safe-area-inset-top));
   right: 12px;
 }
 
 #btn-fire-mobile {
-  bottom: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom));
   right: 24px;
   border-color: var(--explosive-red);
   color: var(--explosive-red);
+  box-shadow: 0 0 20px rgba(255, 58, 58, 0.18);
 }
 
 @media (max-width: 768px) {
@@ -238,5 +258,10 @@ html, body {
 
   .hud-value {
     font-size: 18px;
+  }
+
+  .btn-primary, .btn-secondary {
+    min-width: min(72vw, 220px);
+    min-height: 54px;
   }
 }
