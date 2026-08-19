@@ -239,7 +239,8 @@ html, body {
 }
 
 #btn-pause-mobile {
-  top: max(12px, env(safe-area-inset-top));
+  /* Sitúa el botón de pausa por debajo del HUD para evitar solapamientos con las vidas */
+  top: calc(12px + 56px + env(safe-area-inset-top));
   right: 12px;
 }
 
