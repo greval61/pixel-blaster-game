@@ -5,25 +5,28 @@ class SoundManager {
     this.ctx = null;
     this.enabled = true;
     this.muted = (localStorage.getItem('pixelBlasterMuted') === 'true');
-    try {
-      this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-    } catch {
-      this.enabled = false;
-    }
-
-    if (this.ctx) {
-      this.masterGain = this.ctx.createGain();
-      this.masterGain.gain.value = this.muted ? 0 : 1;
-      this.masterGain.connect(this.ctx.destination);
-    } else {
-      this.masterGain = null;
-    }
+    this.masterGain = null;
 
     // simple synthesized ambient pad as fallback background music
     this.padOsc = null;
     this.padGain = null;
     this.musicPlaying = false;
-    if (this.ctx) this._initMusicFallback();
+    this._padTimer = null;
+  }
+
+  _createContext() {
+    if (this.ctx) return;
+    try {
+      this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    } catch (e) {
+      this.enabled = false;
+      return;
+    }
+
+    this.masterGain = this.ctx.createGain();
+    this.masterGain.gain.value = this.muted ? 0.0001 : 1.0; // avoid zero for exponential ramps
+    this.masterGain.connect(this.ctx.destination);
+    this._initMusicFallback();
   }
 
   _beep(freq, duration, type = 'square', volume = 0.08) {
@@ -32,57 +35,76 @@ class SoundManager {
     const gain = this.ctx.createGain();
     osc.type = type;
     osc.frequency.value = freq;
-    gain.gain.value = volume;
-    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+    const now = this.ctx.currentTime;
+    gain.gain.setValueAtTime(volume, now);
+    // ramp down to a tiny value instead of zero to avoid exponential errors
+    const minVal = 0.0001;
+    gain.gain.exponentialRampToValueAtTime(minVal, now + Math.max(duration, 0.02));
     osc.connect(gain);
     gain.connect(this.masterGain || this.ctx.destination);
     osc.start();
-    osc.stop(this.ctx.currentTime + duration);
+    osc.stop(now + duration + 0.02);
   }
 
   _initMusicFallback() {
+    if (!this.ctx) return;
+    if (this.padOsc) return;
     this.padOsc = this.ctx.createOscillator();
     this.padGain = this.ctx.createGain();
     this.padOsc.type = 'sine';
     this.padOsc.frequency.value = 110;
-    this.padGain.gain.value = 0.0; // start silent
+    this.padGain.gain.value = 0.00001; // near silent
     this.padOsc.connect(this.padGain);
     this.padGain.connect(this.masterGain);
     this.padOsc.start();
 
     // gentle periodic modulation
     this._padTimer = setInterval(() => {
-      if (!this.padOsc) return;
+      if (!this.padOsc || !this.padGain) return;
       const now = this.ctx.currentTime;
       const targetFreq = 80 + Math.random() * 240;
       this.padOsc.frequency.exponentialRampToValueAtTime(targetFreq, now + 0.5);
       this.padGain.gain.cancelScheduledValues(now);
-      this.padGain.gain.setValueAtTime(this.muted ? 0 : 0.008, now);
-      this.padGain.gain.exponentialRampToValueAtTime(this.muted ? 0 : 0.016, now + 0.8);
-      this.padGain.gain.exponentialRampToValueAtTime(this.muted ? 0 : 0.008, now + 2.0);
+      if (this.muted) {
+        this.padGain.gain.setValueAtTime(0.00001, now);
+      } else {
+        this.padGain.gain.setValueAtTime(0.008, now);
+        this.padGain.gain.exponentialRampToValueAtTime(0.016, now + 0.8);
+        this.padGain.gain.exponentialRampToValueAtTime(0.008, now + 2.0);
+      }
     }, 1800);
   }
 
   resume() {
-    if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+    if (!this.ctx) this._createContext();
+    if (this.ctx && this.ctx.state === 'suspended') return this.ctx.resume();
+    return Promise.resolve();
   }
 
   playMusic() {
     if (!this.ctx) return;
     this.musicPlaying = true;
-    if (this.padGain) this.padGain.gain.setValueAtTime(this.muted ? 0 : 0.008, this.ctx.currentTime);
+    const now = this.ctx.currentTime;
+    if (this.padGain) this.padGain.gain.setValueAtTime(this.muted ? 0.00001 : 0.008, now);
   }
 
   stopMusic() {
     if (!this.ctx) return;
     this.musicPlaying = false;
-    if (this.padGain) this.padGain.gain.setValueAtTime(0, this.ctx.currentTime);
+    const now = this.ctx.currentTime;
+    if (this.padGain) this.padGain.gain.setValueAtTime(0.00001, now);
   }
 
   setMuted(val) {
     this.muted = !!val;
     localStorage.setItem('pixelBlasterMuted', this.muted ? 'true' : 'false');
-    if (this.masterGain) this.masterGain.gain.setValueAtTime(this.muted ? 0 : 1, this.ctx.currentTime);
+    if (!this.ctx) return;
+    const now = this.ctx.currentTime;
+    // adjust master gain; avoid exact zero to prevent exponential ramp errors
+    const target = this.muted ? 0.0001 : 1.0;
+    this.masterGain.gain.setValueAtTime(this.masterGain.gain.value || target, now);
+    this.masterGain.gain.linearRampToValueAtTime(target, now + 0.05);
+
     if (this.muted) this.stopMusic(); else this.playMusic();
   }
 
