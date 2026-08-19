@@ -13,5 +13,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Asignar el juego a una variable global para depuración
   window.__pixelBlaster = game;
+
+  // Vincular el botón de sonido
+  const btnSound = document.getElementById('btn-sound');
+  if (btnSound) {
+    const updateIcon = () => { btnSound.textContent = (game.sound && game.sound.muted) ? '🔇' : '🔊'; };
+    updateIcon();
+    btnSound.addEventListener('click', () => {
+      if (game.sound) {
+        game.sound.toggleMute();
+        updateIcon();
+      }
+    });
+    // start music according to saved state
+    if (game.sound && !game.sound.muted) game.sound.playMusic();
+  }
 });
 
