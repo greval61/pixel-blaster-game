@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación - Pixel Blaster</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #0D0D0D 0%, #1A1A40 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(0, 229, 255, 0.1);
+            border-radius: 10px;
+            border: 2px solid #00E5FF;
+        }
+        
+        h1 {
+            color: #00E5FF;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+        
+        .subtitle {
+            color: #FFE600;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .description {
+            color: #a0a0a0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        section {
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #00E5FF;
+        }
+        
+        h2 {
+            color: #00E5FF;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: #FFE600;
+            margin: 1rem 0 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #00FF7A;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+        }
+        
+        .card h4 {
+            color: #FF00C8;
+            margin-bottom: 0.5rem;
+        }
+        
+        .controls-info {
+            background: rgba(255, 230, 0, 0.1);
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #FFE600;
+        }
+        
+        .color-box {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            border-radius: 3px;
+            vertical-align: middle;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        th {
+            background: rgba(0, 229, 255, 0.2);
+            color: #00E5FF;
+        }
+        
+        .architecture-diagram {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: monospace;
+            white-space: pre;
+            color: #00FF7A;
+            overflow-x: auto;
+        }
+        
+        .highlight {
+            color: #FFE600;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1rem;
+            color: #666;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Pixel Blaster</h1>
+            <p class="subtitle">ARCADE SHOOTER - Documentación Técnica</p>
+            <p class="description">
+                Un juego de disparos arcade desarrollado con JavaScript puro y HTML5 Canvas. 
+                Cuenta con un sistema de oleadas, múltiples tipos de enemigos, power-ups, 
+                efectos de partículas y soporte para dispositivos móviles.
+            </p>
+        </header>
+
+        <section>
+            <h2>📋 Descripción General</h2>
+            <p>
+                Pixel Blaster es un clásico juego de disparos en formato vertical donde el jugador 
+                controla una nave espacial que debe defenderse de oleadas de enemigos. El juego 
+                presenta una progresión por oleadas con dificultad creciente, culminando en un 
+                jefe final en la oleada 10.
+            </p>
+            <div class="controls-info">
+                <h3>🎮 Controles</h3>
+                <ul>
+                    <li><strong>Mover:</strong> Teclas A/D o Flechas Izquierda/Derecha</li>
+                    <li><strong>Disparar:</strong> Barra espaciadora (automático mientras se presiona)</li>
+                    <li><strong>Pausa:</strong> Tecla P o ESC</li>
+                    <li><strong>Móvil:</strong> Touch para mover, botón 🔥 para disparar</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>🏗️ Arquitectura del Sistema</h2>
+            <p>El juego está organizado en módulos JavaScript que se cargan secuencialmente:</p>
+            
+            <div class="architecture-diagram">
+┌─────────────────────────────────────────────────────────────┐
+│                    MAIN (main.js)                            │
+│  - Inicialización del juego                                  │
+│  - Configuración de Service Worker                           │
+│  - Gestión de audio                                          │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    GAME (game.js)                            │
+│  - Coordinador principal                                     │
+│  - Game loop (update/render)                                 │
+│  - Gestión de estados (menu, playing, paused, gameover)      │
+│  - Sistema de sonido (SoundManager)                          │
+└─────────────────────────────────────────────────────────────┘
+           │         │         │         │         │
+           ▼         ▼         ▼         ▼         ▼
+    ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
+    │  PLAYER  │ │  ENEMY   │ │  WAVE    │ │RENDERER  │ │ INPUT    │
+    │          │ │  POOL    │ │ MANAGER  │ │          │ │ MANAGER  │
+    └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘
+           │         │         │                  
+           ▼         ▼         ▼                  
+    ┌──────────┐ ┌──────────┐ ┌──────────┐        
+    │ BULLET   │ │PARTICLE  │ │ POWER-UP │        
+    │  POOL    │ │ SYSTEM   │ │ MANAGER  │        
+    └──────────┘ └──────────┘ └──────────┘        
+            </div>
+
+            <h3>📁 Estructura de Archivos</h3>
+            <ul>
+                <li><code>main.js</code> - Punto de entrada y configuración inicial</li>
+                <li><code>src/utils.js</code> - Constantes y funciones utilitarias</li>
+                <li><code>src/input.js</code> - Gestión de entrada (teclado y touch)</li>
+                <li><code>src/renderer.js</code> - Sistema de renderizado y sprites</li>
+                <li><code>src/particleSystem.js</code> - Efectos de partículas</li>
+                <li><code>src/player.js</code> - Lógica del jugador y power-ups</li>
+                <li><code>src/enemy.js</code> - Sistema de enemigos y IA</li>
+                <li><code>src/waveManager.js</code> - Gestión de oleadas y progresión</li>
+                <li><code>src/game.js</code> - Clase principal del juego</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>🎨 Sistema de Renderizado</h2>
+            <p>El renderizado utiliza HTML5 Canvas con un sistema de sprites generados programáticamente:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>🎯 Características</h4>
+                    <ul>
+                        <li>Resolución: 480x640 píxeles</li>
+                        <li>Sprites generados al vuelo</li>
+                        <li>Efectos de neón/glow</li>
+                        <li>Fondo con estrellas y nebulosas</li>
+                        <li>Sistema de shake para impactos</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🌈 Paleta de Colores</h4>
+                    <ul>
+                        <li><span class="color-box" style="background: #00E5FF;"></span>Neon Cyan - Jugador</li>
+                        <li><span class="color-box" style="background: #FF3A3A;"></span>Explosive Red - Enemigos básicos</li>
+                        <li><span class="color-box" style="background: #00FF7A;"></span>Phospho Green - Insectos/Escudos</li>
+                        <li><span class="color-box" style="background: #FF00C8;"></span>Electric Magenta - Fantasmas</li>
+                        <li><span class="color-box" style="background: #FFE600;"></span>Laser Yellow - Balas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🖼️ Sprites Generados</h3>
+            <table>
+                <tr>
+                    <th>Sprite</th>
+                    <th>Dimensiones</th>
+                    <th>Descripción</th>
+                </tr>
+                <tr>
+                    <td>Player</td>
+                    <td>24x24 (3 frames)</td>
+                    <td>Nave del jugador con animación de motor</td>
+                </tr>
+                <tr>
+                    <td>Drone</td>
+                    <td>20x20</td>
+                    <td>Enemigo básico cuadrado</td>
+                </tr>
+                <tr>
+                    <td>Insect</td>
+                    <td>22x22</td>
+                    <td>Enemigo con forma de insecto</td>
+                </tr>
+                <tr>
+                    <td>Ghost</td>
+                    <td>20x24</td>
+                    <td>Enemigo fantasma semitransparente</td>
+                </tr>
+                <tr>
+                    <td>Boss</td>
+                    <td>48x48</td>
+                    <td>Jefe final con barra de vida</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>👤 Sistema del Jugador</h2>
+            <p>La clase <code>Player</code> gestiona todas las características del jugador:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>⚡ Estadísticas Base</h4>
+                    <ul>
+                        <li>Velocidad: 220 px/s</li>
+                        <li>Vidas: 3</li>
+                        <li>Cadencia de disparo: 0.15s</li>
+                        <li>Invencibilidad tras daño: 2s</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🎁 Power-ups</h4>
+                    <ul>
+                        <li><strong>Double Shot:</strong> Disparo doble (10s)</li>
+                        <li><strong>Shield:</strong> Escudo protector (8s)</li>
+                        <li><strong>Speed:</strong> Velocidad +60% (6s)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔫 Sistema de Disparo</h3>
+            <p>El jugador dispara proyectiles hacia arriba al presionar la barra espaciadora con las siguientes características:</p>
+            <ul>
+                <li>Velocidad de proyectil: 400 px/s (hacia arriba)</li>
+                <li>Daño: 1 punto por impacto</li>
+                <li>Color: Neon Cyan (individual), Electric Magenta (doble)</li>
+                <li>Con double shot: 3 proyectiles en patrón abanico</li>
+                <li>Cadencia: 0.15s entre disparos</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>👾 Sistema de Enemigos</h2>
+            <p>El juego cuenta con múltiples tipos de enemigos, cada uno con comportamientos únicos:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>🔴 Drone</h4>
+                    <ul>
+                        <li>HP: 1</li>
+                        <li>Puntos: 100</li>
+                        <li>Velocidad: 60 px/s</li>
+                        <li>Patrón: Línea recta</li>
+                        <li>Dispara: No</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🟢 Insect</h4>
+                    <ul>
+                        <li>HP: 2</li>
+                        <li>Puntos: 200</li>
+                        <li>Velocidad: 45 px/s</li>
+                        <li>Patrón: Zigzag</li>
+                        <li>Dispara: Sí (cada 2.5s)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🟣 Ghost</h4>
+                    <ul>
+                        <li>HP: 1</li>
+                        <li>Puntos: 150</li>
+                        <li>Velocidad: 50 px/s</li>
+                        <li>Patrón: Ondulatorio</li>
+                        <li>Dispara: Sí (cada 3s)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>👹 Boss</h4>
+                    <ul>
+                        <li>HP: 30</li>
+                        <li>Puntos: 5000</li>
+                        <li>Velocidad: 40 px/s</li>
+                        <li>Patrón: Movimiento complejo</li>
+                        <li>Dispara: Sí (cada 1.2s + spread)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🧠 IA del Jefe Final</h3>
+            <p>El boss tiene 3 fases de comportamiento que ciclan:</p>
+            <ol>
+                <li><strong>Fase 0:</strong> Movimiento horizontal senoidal (3s)</li>
+                <li><strong>Fase 1:</strong> Movimiento rápido horizontal (4s)</li>
+                <li><strong>Fase 2:</strong> Movimiento en amplias ondas (5s)</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>🌊 Sistema de Oleadas</h2>
+            <p>El <code>WaveManager</code> controla la progresión del juego:</p>
+            
+            <h3>📈 Progresión de Dificultad</h3>
+            <table>
+                <tr>
+                    <th>Oleada</th>
+                    <th>Enemigos</th>
+                    <th>Tipos</th>
+                    <th>Velocidad</th>
+                    <th>Spawn Delay</th>
+                </tr>
+                <tr>
+                    <td>1-2</td>
+                    <td>6-8</td>
+                    <td>Drone</td>
+                    <td>100%</td>
+                    <td>0.47-0.44s</td>
+                </tr>
+                <tr>
+                    <td>3-5</td>
+                    <td>10-14</td>
+                    <td>Drone, Insect</td>
+                    <td>112-136%</td>
+                    <td>0.41-0.35s</td>
+                </tr>
+                <tr>
+                    <td>6-8</td>
+                    <td>16-20</td>
+                    <td>Drone, Insect, Ghost</td>
+                    <td>148-172%</td>
+                    <td>0.32-0.26s</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>22</td>
+                    <td>Todos</td>
+                    <td>184%</td>
+                    <td>0.23s</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>1</td>
+                    <td><span class="highlight">BOSS</span></td>
+                    <td>196%</td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+            <h3>⏱️ Sistema de Spawning</h3>
+            <ul>
+                <li>Los enemigos aparecen en formación precalculada</li>
+                <li>Posición inicial aleatoria dentro de una cuadrícula</li>
+                <li>Delay entre spawns disminuye con cada oleada</li>
+                <li>Entre oleadas: 2 segundos de descanso</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>✨ Sistema de Partículas</h2>
+            <p>El <code>ParticleSystem</code> proporciona efectos visuales con un pool de 500 partículas:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>🔥 Tipos de Efectos</h4>
+                    <ul>
+                        <li><strong>Engine:</strong> Estelas del motor del jugador</li>
+                        <li><strong>Trail:</strong> Estelas de proyectiles</li>
+                        <li><strong>Explosion:</strong> Explosiones al destruir enemigos</li>
+                        <li><strong>Impact:</strong> Impactos de balas</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>⚙️ Parámetros</h4>
+                    <ul>
+                        <li>Velocidad: 20-160 px/s</li>
+                        <li>Vida: 0.1-0.9s</li>
+                        <li>Tamaño: 1-5px</li>
+                        <li>Gravedad: 0-30 px/s²</li>
+                        <li>Efecto glow: Configurable</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>💥 ExplosionEffect</h3>
+            <p>Efecto adicional de onda expansiva con:</p>
+            <ul>
+                <li>Flash inicial blanco</li>
+                <li>Círculo expansivo en forma de estrella</li>
+                <li>Duración: 0.4s</li>
+                <li>Radio configurable según tipo de enemigo</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>🔊 Sistema de Audio</h2>
+            <p>El <code>SoundManager</code> utiliza Web Audio API para generar sonido sintetizado:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>🎵 Efectos de Sonido</h4>
+                    <ul>
+                        <li><strong>Shoot:</strong> Square wave 880Hz</li>
+                        <li><strong>Enemy Shoot:</strong> Sawtooth 220Hz</li>
+                        <li><strong>Explosion:</strong> Sawtooth 110Hz</li>
+                        <li><strong>Power-up:</strong> Double square 660-880Hz</li>
+                        <li><strong>Player Hit:</strong> Sawtooth 150Hz</li>
+                        <li><strong>Boss Defeat:</strong> Melodía ascendente</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🎶 Música de Fondo</h4>
+                    <ul>
+                        <li>Pad sintetizado (sine wave)</li>
+                        <li>Frecuencia base: 110Hz</li>
+                        <li>Modulación aleatoria: 80-320Hz</li>
+                        <li>Volumen dinámico suave</li>
+                        <li>Control de mute persistente</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔇 Gestión de Audio</h3>
+            <ul>
+                <li>Contexto de audio creado tras interacción del usuario</li>
+                <li>Estado de mute guardado en localStorage</li>
+                <li>Master gain para control de volumen global</li>
+                <li>Resumes automático al salir de pausa</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>🎯 Sistema de Colisiones</h2>
+            <p>El juego utiliza detección de colisiones por rectángulos (AABB):</p>
+            
+            <h3>📐 Tipos de Colisiones</h3>
+            <ul>
+                <li><strong>Bala vs Enemigo:</strong> Daño al enemigo, impacto visual</li>
+                <li><strong>Bala enemiga vs Jugador:</strong> Daño al jugador si no está invencible</li>
+                <li><strong>Jugador vs Enemigo:</strong> Colisión cuerpo a cuerpo, daño mutuo</li>
+                <li><strong>Jugador vs Power-up:</strong> Activación del power-up</li>
+            </ul>
+
+            <h3>🛡️ Sistema de Invencibilidad</h3>
+            <ul>
+                <li>2 segundos de invencibilidad tras recibir daño</li>
+                <li>Efecto visual de parpadeo durante invencibilidad</li>
+                <li>El escudo absorbe un daño y proporciona 1s de invencibilidad</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>📱 Características Móviles</h2>
+            <p>El juego está optimizado para dispositivos móviles:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>📲 PWA Support</h4>
+                    <ul>
+                        <li>Manifest para instalación</li>
+                        <li>Service Worker para cache</li>
+                        <li>Modo standalone</li>
+                        <li>Orientación portrait</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>👆 Controles Táctiles</h4>
+                    <ul>
+                        <li>Touch para moverse horizontalmente</li>
+                        <li>Botón virtual de disparo</li>
+                        <li>Botón virtual de pausa</li>
+                        <li>Botón de mute</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>📏 Responsive Design</h3>
+            <ul>
+                <li>Canvas escala manteniendo aspect ratio</li>
+                <li>Adaptación automática al tamaño de pantalla</li>
+                <li>UI adaptativa para móviles</li>
+                <li>Prevención de zoom accidental</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>⚙️ Constantes y Configuración</h2>
+            <p>Valores fundamentales definidos en <code>utils.js</code>:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>📐 Dimensiones</h4>
+                    <ul>
+                        <li>GAME_WIDTH: 480px</li>
+                        <li>GAME_HEIGHT: 640px</li>
+                        <li>Aspect Ratio: 3:4</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🎨 Colores de Fondo</h4>
+                    <ul>
+                        <li>10 variantes por oleada</li>
+                        <li>Rango: #0D0D0D a #180818</li>
+                        <li>Cambio automático por oleada</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔧 Funciones Utilitarias</h3>
+            <ul>
+                <li><code>clamp(val, min, max)</code> - Limitación de valores</li>
+                <li><code>rand(min, max)</code> - Número aleatorio flotante</li>
+                <li><code>randInt(min, max)</code> - Número aleatorio entero</li>
+                <li><code>dist(x1, y1, x2, y2)</code> - Distancia euclidiana</li>
+                <li><code>rectOverlap(a, b)</code> - Colisión AABB</li>
+                <li><code>circleRectOverlap(...)</code> - Colisión círculo-rectángulo</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>🔄 Game Loop</h2>
+            <p>El bucle principal del juego opera de la siguiente manera:</p>
+            
+            <div class="architecture-diagram">
+┌─────────────────────────────────────────────────────────────┐
+│                    GAME LOOP (60 FPS)                       │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+                    ┌─────────────────┐
+                    │  Calculate dt   │
+                    │  (max 0.05s)    │
+                    └─────────────────┘
+                              │
+                              ▼
+              ┌───────────────────────────────┐
+              │     IF state == 'playing'     │
+              └───────────────────────────────┘
+                              │
+                              ▼
+        ┌─────────────────────────────────────────────────┐
+        │                    UPDATE(dt)                    │
+        │  • Input update                                  │
+        │  • Player update                                 │
+        │  • Bullets update                                │
+        │  • Enemies update                                │
+        │  • Wave manager update                           │
+        │  • Power-ups update                              │
+        │  • Particles update                              │
+        │  • Collision detection                          │
+        │  • UI updates                                    │
+        └─────────────────────────────────────────────────┘
+                              │
+                              ▼
+        ┌─────────────────────────────────────────────────┐
+        │                   RENDER()                       │
+        │  • Clear canvas                                  │
+        │  • Draw background (stars, nebulae)              │
+        │  • Draw enemies                                  │
+        │  • Draw power-ups                                │
+        │  • Draw bullets                                  │
+        │  • Draw player                                   │
+        │  • Draw particles                                │
+        │  • Draw explosions                               │
+        └─────────────────────────────────────────────────┘
+                              │
+                              ▼
+                    ┌─────────────────┐
+                    │  requestAnimationFrame │
+                    └─────────────────┘
+            </div>
+        </section>
+
+        <section>
+            <h2>🏆 Sistema de Puntuación</h2>
+            <p>Los puntos se otorgan al destruir enemigos:</p>
+            
+            <table>
+                <tr>
+                    <th>Enemigo</th>
+                    <th>Puntos</th>
+                </tr>
+                <tr>
+                    <td>Drone</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>Ghost</td>
+                    <td>150</td>
+                </tr>
+                <tr>
+                    <td>Insect</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>Boss</td>
+                    <td>5,000</td>
+                </tr>
+            </table>
+
+            <h3>📊 HUD</h3>
+            <p>El heads-up display muestra:</p>
+            <ul>
+                <li><strong>SCORE:</strong> Puntuación actual</li>
+                <li><strong>WAVE:</strong> Número de oleada actual</li>
+                <li><strong>LIVES:</strong> Vidas restantes (iconos)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>🚀 Optimizaciones</h2>
+            <p>El juego implementa varias técnicas de optimización:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>💾 Object Pooling</h4>
+                    <ul>
+                        <li>Pool de 100 balas</li>
+                        <li>Pool de 60 enemigos</li>
+                        <li>Pool de 500 partículas</li>
+                        <li>Pool de 10 power-ups</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🎨 Sprite Caching</h4>
+                    <ul>
+                        <li>Sprites generados una vez</li>
+                        <li>Canvas offscreen para sprites</li>
+                        <li>Reutilización de canvas</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>⚡ Performance</h4>
+                    <ul>
+                        <li>Delta time limiting</li>
+                        <li>Filtrado de objetos activos</li>
+                        <li>Renderizado condicional</li>
+                        <li>Garbage collection minimizada</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>🎮 Estados del Juego</h2>
+            <p>El juego gestiona cuatro estados principales:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>📋 MENU</h4>
+                    <p>Pantalla de título con instrucciones y botón de inicio.</p>
+                </div>
+                <div class="card">
+                    <h4>🎮 PLAYING</h4>
+                    <p>Estado activo donde se ejecuta el game loop completo.</p>
+                </div>
+                <div class="card">
+                    <h4>⏸️ PAUSED</h4>
+                    <p>Juego detenido, se muestra menú de pausa con opciones.</p>
+                </div>
+                <div class="card">
+                    <h4>💀 GAMEOVER</h4>
+                    <p>Fin del juego, muestra puntuación final y opción de reiniciar.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>🔮 Extensiones Posibles</h2>
+            <p>Ideas para futuras mejoras del juego:</p>
+            
+            <ul>
+                <li><strong>Más tipos de enemigos:</strong> Con diferentes patrones de movimiento</li>
+                <li><strong>Sistema de high scores:</strong> Guardar mejores puntuaciones</li>
+                <li><strong>Niveles procedurales:</strong> Generación infinita de oleadas</li>
+                <li><strong>Más power-ups:</strong> Disparo spread, bombas, tiempo lento</li>
+                <li><strong>Sonido mejorado:</strong> Efectos de audio más complejos</li>
+                <li><strong>Multiplayer:</strong> Modo cooperativo local</li>
+                <li><strong>Logros:</strong> Sistema de logros y desbloqueables</li>
+                <li><strong>Skins:</strong> Personalización de la nave</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>Documentación generada para Pixel Blaster - Arcade Shooter</p>
+            <p>Desarrollado con JavaScript, HTML5 Canvas y Web Audio API</p>
+        </footer>
+    </div>
+</body>
+</html>

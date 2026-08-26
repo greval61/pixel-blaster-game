@@ -81,4 +81,8 @@ window.InputManager = class InputManager {
   isMoving() {
     return this.getMoveDirection() !== 0 || this.touchActive;
   }
+
+  isFireDown() {
+    return this.keys['Space'] || this.firePressed;
+  }
 }

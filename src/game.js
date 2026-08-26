@@ -289,7 +289,7 @@ window.Game = class Game {
   }
 
   _handlePlayerFire() {
-    if (!this.player.canFire()) return;
+    if (!this.player.canFire() || !this.input.isFireDown()) return;
 
     const center = this.player.getCenter();
     this.bullets.spawn(center.x, center.y - 10, -400, true, COLORS.neonCyan);
